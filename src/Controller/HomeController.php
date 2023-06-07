@@ -2,18 +2,15 @@
 
 namespace App\Controller;
 
+use App\Services\NewsService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    private $client;
-
-    public function __construct(HttpClientInterface $client)
+    public function __construct(private NewsService $newsService)
     {
-        $this->client = $client;
     }
 
     #[Route('/', name: 'home_index', methods: ['GET'])]
@@ -23,7 +20,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'pageTitle' => $pageTitle,
-            'categories' => $this->getCategoriesList()
+            'categories' => $this->newsService->getCategoriesList()
         ]);
     }
 
@@ -32,24 +29,8 @@ class HomeController extends AbstractController
     {
         return $this->render('home/category.html.twig', [
             'pageTitle' => $slug,
-            'categories' => $this->getCategoriesList(),
-            'news' => $this->getNewsList()
+            'categories' => $this->newsService->getCategoriesList(),
+            'news' => $this->newsService->getNewsList()
         ]);
-    }
-
-    public function getCategoriesList(): array
-    {
-        $url = 'https://raw.githubusercontent.com/JonasPoli/array-news/main/arrayCategoryNews.json';
-        $response = $this->client->request('GET', $url);
-
-        return $response->toArray();
-    }
-
-    public function getNewsList(): array
-    {
-        $url = 'https://raw.githubusercontent.com/JonasPoli/array-news/main/arrayNews.json';
-        $response = $this->client->request('GET', $url);
-
-        return $response->toArray();
     }
 }

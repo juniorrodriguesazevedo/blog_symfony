@@ -7,9 +7,12 @@ use App\Entity\Category;
 use App\Repository\NewsRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -31,12 +34,21 @@ class HomeController extends AbstractController
     }
 
     #[Route('/category/{slug}', name: 'home_category', methods: ['GET'])]
-    public function category(string $slug = null): Response
+    public function category(Request $request, string $slug = null): Response
     {
+        $queryBuilder = $this->newsRepository->createQueryBuilderByCategoryTitle($slug);
+        $adapter = new QueryAdapter($queryBuilder);
+
+        $pagerFanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
+            $adapter,
+            $request->get('page', 1),
+            6
+        );
+
         return $this->render('home/category.html.twig', [
             'pageTitle' => $slug,
             'categories' => $this->categoryRepository->findAllCategoriesOrderByTitle(),
-            'news' => $this->newsRepository->findByCategoryName($slug)
+            'pager' => $pagerFanta
         ]);
     }
 }

@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\News;
+use Pagerfanta\Pagerfanta;
 use App\Repository\NewsRepository;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Config\BabdevPagerfantaConfig;
 
 class NewsController extends AbstractController
 {
@@ -50,10 +53,17 @@ class NewsController extends AbstractController
     public function search(Request $request): Response
     {
         $search = $request->get('search');
-        $news = $this->newsRepository->findBySearch($search);
+        $queryBuilder = $this->newsRepository->createQueryBuilderBySearch($search);
+        $adpter = new QueryAdapter($queryBuilder);
+        
+        $pageFanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
+            $adpter,
+            $request->get('page', 1),
+            6
+        );
 
         return $this->render('news/search.html.twig', [
-            'news' => $news,
+            'pager' => $pageFanta,
             'search' => $search
         ]);
     }

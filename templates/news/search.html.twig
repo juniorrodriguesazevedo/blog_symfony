@@ -10,7 +10,7 @@
 			<b>Pesquinsado:</b>
 			{{ search }}</h2>
 
-		{% for new in news %}
+		{% for new in pager %}
 			<hr>
 			<div class="row gx-5">
 				<div class="col-md-4 mb-4">
@@ -37,5 +37,7 @@
 			<h3>Não encontramos nenhuma notícia que atenda os requisitos.<h3>
 
 				{% endfor %}
+				{{ pagerfanta(pager) }}
 			</div>
+
 		{% endblock %}

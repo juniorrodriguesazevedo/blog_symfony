@@ -12,7 +12,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         CategoryFactory::createMany(7);
-        NewsFactory::createMany(200, function() {
+        NewsFactory::createMany(1000, function() {
             return [ 'category' => CategoryFactory::random()];
         });
 

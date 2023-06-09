@@ -22,7 +22,7 @@
 		<div class="album py-5 bg-body-tertiary">
 			<div class="container">
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-					{% for new in news %}
+					{% for new in pager %}
 						<div class="col">
 							<div class="card shadow-sm">
 								<img src="{{ new.image }}" alt="{{ new.title }}">
@@ -40,6 +40,8 @@
 						</div>
 					{% endfor %}
 				</div>
+				<br>
+				{{ pagerfanta(pager) }}
 			</div>
 		</div>
 	</main>

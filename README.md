@@ -11,11 +11,11 @@ Projeto feito em Symfony Framework para fins de aprendizado e treinamento.
 ### Propagar o banco
 Existem duas formas, você pode usar os comandos:
 ```
-symfony console app:add-categories
-symfony console app:add-news
+php bin/console app:add-categories
+php bin/console app:add-news
 ```
 ou
 ```
-symfony console doctrine:fixtures:load
+php bin/console doctrine:fixtures:load
 ```
 O primeiro cria os dados através dos `commands` e o segundo através das `factory/fixtures`.

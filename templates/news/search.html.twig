@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Pesquisa
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h2>
+			<b>Pesquinsado:</b>
+			{{ search }}</h2>
+
+		{% for new in news %}
+			<hr>
+			<div class="row gx-5">
+				<div class="col-md-4 mb-4">
+					<div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+						<img src="{{ new.image }}" class="img-fluid"/>
+						<a href="#!">
+							<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-md-8 mb-4">
+					<a href="{{ path('home_category', {slug: new.category.name}) }}" class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">{{ new.category.name }}</a>
+					<p>{{ new.createAt|date('d/m/Y h:i') }}</p>
+					<h4>
+						<strong>{{ new.title }}</strong>
+					</h4>
+					<p class="text-muted">{{ new.description }}</p>
+					<a href="{{ path('news_show', {'new' : new.id}) }}" type="button" class="btn btn-primary">Leia mais</a>
+				</div>
+			</div>
+
+		{% else %}
+			<h3>Não encontramos nenhuma notícia que atenda os requisitos.<h3>
+
+				{% endfor %}
+			</div>
+		{% endblock %}

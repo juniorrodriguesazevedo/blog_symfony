@@ -25,16 +25,15 @@
 					{% for new in news %}
 						<div class="col">
 							<div class="card shadow-sm">
-								<img src="https://picsum.photos/419/225?id={{ loop.index }}" alt="{{ new.title }}">
+								<img src="{{ new.image }}" alt="{{ new.title }}">
 								<div class="card-body">
 									<h4 class="h4">{{ new.title }}</h4>
 									<p class="card-text">{{ new.description }}</p>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
-											<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-											<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+											<a class="btn btn-sm btn-outline-secondary" href="{{ path('news_show', {'new' : new.id}) }}">Detalhes</a>
 										</div>
-										<small class="text-body-secondary">{{ new.create_at|date('d/m/Y') }}</small>
+										<small class="text-body-secondary">{{ new.createAt|date('d/m/Y') }}</small>
 									</div>
 								</div>
 							</div>

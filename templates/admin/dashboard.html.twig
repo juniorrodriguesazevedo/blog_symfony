@@ -1,0 +1,22 @@
+{# templates/admin/my-custom-page.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}
+	Área Administrativa
+{% endblock %}
+
+{% block page_actions %}
+	<a class="btn btn-primary" href="...">Adicionar Postagem</a>
+{% endblock %}
+
+{% block main %}
+	<table class="datagrid">
+		<thead>
+			<tr>
+				<td>Some Column</td>
+				<td>Another Column</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+{% endblock %}

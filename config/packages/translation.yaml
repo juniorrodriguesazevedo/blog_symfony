@@ -1,0 +1,12 @@
+framework:
+    default_locale: pt_BR
+    translator:
+        paths:
+            - "%kernel.project_dir%/vendor/easycorp/easyadmin-bundle/src/Resources/translations"
+#        providers:
+#            crowdin:
+#                dsn: '%env(CROWDIN_DSN)%'
+#            loco:
+#                dsn: '%env(LOCO_DSN)%'
+#            lokalise:
+#                dsn: '%env(LOKALISE_DSN)%'

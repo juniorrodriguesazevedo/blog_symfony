@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'home_index', methods: ['GET'])]
+    #[Route('/', name: 'home', methods: ['GET'])]
     public function index(): Response
     {
         $pageTitle = 'Home';

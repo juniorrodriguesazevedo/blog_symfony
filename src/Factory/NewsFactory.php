@@ -50,7 +50,6 @@ final class NewsFactory extends ModelFactory
             'createAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->text(),
             'title' => self::faker()->jobTitle(),
-            'image' => 'https://loremflickr.com/419/225/' . rand(1000, 10000),
             'content' => self::faker()->sentences(50, true)
         ];
     }

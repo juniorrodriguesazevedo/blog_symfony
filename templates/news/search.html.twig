@@ -15,7 +15,11 @@
 			<div class="row gx-5">
 				<div class="col-md-4 mb-4">
 					<div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-						<img src="{{ new.image }}" class="img-fluid"/>
+						{% if not new.image %}
+							<img src="https://loremflickr.com/419/225/{{new.id}}" alt="{{ new.title }}" class="img-fluid">
+						{% else %}
+							<img src="{{ asset('uploads/imgs/') }}{{ new.image }}" alt="{{ new.title }}" class="img-fluid">
+						{% endif %}
 						<a href="#!">
 							<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
 						</a>

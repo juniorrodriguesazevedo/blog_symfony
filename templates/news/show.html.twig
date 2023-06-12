@@ -8,8 +8,14 @@
 	<div class="container">
 		<h1>{{ new.title }}</h1>
 		<h3>{{ new.description }}</h3>
-		<img class="float-start me-4 mb-4" src="{{ new.image }}" alt="{{ new.title }}">
-		<h5>{{new.category.name }} - {{ new.createAt|date('d/m/Y h:m') }}</h5>
+		{% if not new.image %}
+			<img class="float-start me-4 mb-4" src="https://loremflickr.com/419/225/{{new.id}}" alt="{{ new.title }}">
+		{% else %}
+			<img class="float-start me-4 mb-4" src="{{ asset('uploads/imgs/') }}{{ new.image }}" alt="{{ new.title }}">
+		{% endif %}
+		<h5>{{new.category.name }}
+			-
+			{{ new.createAt|date('d/m/Y h:m') }}</h5>
 		<p>{{ new.content|raw }}</p>
 	</div>
 {% endblock %}

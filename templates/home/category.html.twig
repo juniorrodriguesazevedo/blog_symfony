@@ -18,14 +18,17 @@
 				</div>
 			</div>
 		</section>
-
 		<div class="album py-5 bg-body-tertiary">
 			<div class="container">
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 					{% for new in pager %}
 						<div class="col">
 							<div class="card shadow-sm">
-								<img src="{{ new.image }}" alt="{{ new.title }}">
+								{% if not new.image %}
+									<img src="https://loremflickr.com/419/225/{{new.id}}" alt="{{ new.title }}">
+								{% else %}
+									<img src="{{ asset('uploads/imgs/') }}{{ new.image }}" alt="{{ new.title }}">
+								{% endif %}
 								<div class="card-body">
 									<h4 class="h4">{{ new.title }}</h4>
 									<p class="card-text">{{ new.description }}</p>

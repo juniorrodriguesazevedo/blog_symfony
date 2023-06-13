@@ -22,10 +22,8 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home', methods: ['GET'])]
     public function index(): Response
     {
-        $pageTitle = 'Home';
-
         return $this->render('home/index.html.twig', [
-            'pageTitle' => $pageTitle,
+            'news' => $this->newsRepository->findLastNews(),
             'categories' => $this->categoryRepository->findAllCategoriesOrderByTitle()
         ]);
     }

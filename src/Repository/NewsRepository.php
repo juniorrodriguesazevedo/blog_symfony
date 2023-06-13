@@ -74,6 +74,15 @@ class NewsRepository extends ServiceEntityRepository
             ->orderBy('n.id', 'ASC');
     }
 
+    public function findLastNews(int $qtd = 5): array
+    {
+        return $this->createQueryBuilder('n')
+            ->orderBy('n.createAt', 'DESC')
+            ->setMaxResults($qtd)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    public function findOneBySomeField($value): ?News
     //    {
     //        return $this->createQueryBuilder('n')

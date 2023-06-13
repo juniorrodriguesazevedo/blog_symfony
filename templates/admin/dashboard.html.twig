@@ -10,13 +10,16 @@
 {% endblock %}
 
 {% block main %}
-	<table class="datagrid">
-		<thead>
-			<tr>
-				<td>Some Column</td>
-				<td>Another Column</td>
-			</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
+	<div class="row">
+		<div class="col-6">
+			<h3>Últimas Notícias</h3>
+			<ol>
+				{% for new in lastNews %}
+					<li class="mb-2">
+						<a target="_blank" href="{{ path('news_show', {'new' : new.id}) }}">{{ new.title }}</a>
+					</li>
+				{% endfor %}
+			</ol>
+		</div>
+	</div>
 {% endblock %}

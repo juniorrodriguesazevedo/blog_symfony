@@ -25,3 +25,9 @@ ou
 php bin/console doctrine:fixtures:load
 ```
 O primeiro cria os dados através dos `commands` e o segundo através das `factory/fixtures`.
+
+### Login:
+```
+Email: admin@admin.com
+Senha: 123456789
+```
